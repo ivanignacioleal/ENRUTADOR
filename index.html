@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enrutamiento de Instalaciones</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Enrutamiento de Instalaciones</h1>
+
+        <form action="/add" method="POST">
+            <label for="client_name">Nombre del cliente:</label>
+            <input type="text" name="client_name" placeholder="Juan Perez" required>
+            <label for="coordinates">Coordenadas (latitud,longitud):</label>
+            <input type="text" name="coordinates" placeholder="-25.27599149, -65.4850453" required>
+            <button type="submit">Agregar tarea</button>
+        </form>
+
+        <h2>Lista de Tareas</h2>
+        <ul id="taskList">
+            {% for task in tasks %}
+                <li>
+                    <b>{{ task[1] }}</b> - Coordenadas: ({{ task[2] }}, {{ task[3] }})
+                    <a href="/delete/{{ task[0] }}">Eliminar</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div id="map" style="height: 400px;"></div>
+        <button id="rerouteBtn">Generar nuevo enrutamiento</button>
+    </div>
+
+    <!-- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script> -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="/static/app.js"></script>
+</body>
+</html>
